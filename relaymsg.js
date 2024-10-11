@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const apiKey = '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';
+const apiKey = '';
 const modelId = 'jusshini/genz_slang_model';
 
 async function translateSlang(text) {
