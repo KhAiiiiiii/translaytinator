@@ -5,9 +5,6 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, Train
 from sklearn.model_selection import train_test_split
 #read the file
 dataset = pd.read_csv('genzlingo.csv')
-#basically error detection
-if 'slang' not in dataset.columns or 'translation' not in dataset.columns:
-    raise ValueError("Dataset must contain 'slang' and 'translation' columns")
 #training data and validation data is taken 
 train_dataset, val_dataset = train_test_split(dataset, test_size=0.1, random_state=42)
 train_dataset = Dataset.from_pandas(train_dataset[['slang', 'translation']])
