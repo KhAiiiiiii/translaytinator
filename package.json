@@ -9,6 +9,7 @@
   "license": "MIT",
   "description": "A Discord bot that translates generational slang, such as Gen Z lingo, into clear, everyday English. This bot helps users of all ages understand the nuances of slang and enhances communication across generations using AI-powered translations.",
   "dependencies": {
+    "@discordjs/rest": "^2.4.0",
     "axios": "^1.7.7",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5"
