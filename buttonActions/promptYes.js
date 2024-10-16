@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ButtonBuilder } = require('discord.js')
 
-module.exports = ({ client, inter }) => {
+module.exports = ({ inter }) => {
     inter.message.edit({
         components: inter.message.components.map(
             arow => new ActionRowBuilder().addComponents(
