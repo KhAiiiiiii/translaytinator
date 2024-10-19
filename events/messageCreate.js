@@ -9,7 +9,7 @@ module.exports = async (client, message) => {
     let slangCount = 0
     const promises = languageDictionary.map(word => {
         return new Promise(res => {
-            const matches = message.content.match(new RegExp(`(?:[\\s]|^)(${word})(?=[\\s]|$)`, 'gi'))
+            const matches = message.content.match(new RegExp(`(?:[^a-z]|^)(${word})(?=[^a-z]|$)`, 'gi'))
             if(matches) slangCount += matches.length
             return res()
         })
