@@ -1,7 +1,9 @@
 const { ActionRowBuilder, ButtonBuilder } = require('discord.js')
 
-module.exports = ({ inter }) => {
-    inter.message.edit({
+const { translateSlang } = require('../oracle/llama.js')
+
+module.exports = async ({ inter }) => {
+    await inter.message.edit({
         components: inter.message.components.map(
             arow => new ActionRowBuilder().addComponents(
                 arow.components.map(b => ButtonBuilder.from(b).setDisabled(true))
@@ -17,13 +19,20 @@ module.exports = ({ inter }) => {
         inter.editReply(`Translating${'.'.repeat(n)}`)
     }, 1000)
 
-    //TODO: change pseudocode out
-    setTimeout(() => { loaded = true }, 10e3)
-
-    //TODO: implement translation
+    // Translation
     const { channelId, messageId } = inter.message.reference
     const originalMessage = inter.guild.channels.cache.get(channelId)?.messages.cache.get(messageId)
     if(!originalMessage) return inter.editReply('Error parsing original message!')
-    originalMessage.reply('Translate deez nuts!')
+        
+    const prompt = client.config.translationBasePrompt
+                    .replace('{0}', originalMessage.content)
+                    .replace('{1}', 'Gen Z slang')
+                    .replace('{2}', 'normal English')
+    const translatedMessage = await translateSlang(prompt)
 
+    originalMessage.reply(translatedMessage)
+
+    loaded = true
+    await inter.message.delete()
+    await inter.deleteReply()
 }
