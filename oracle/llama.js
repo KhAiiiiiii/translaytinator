@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-
 const apiKey = process.env.GROQ_API_KEY;
 if (!apiKey) {
     console.error("API key is missing. Please check your .env file.");
@@ -22,7 +21,7 @@ async function translateSlang(prompt) {
             "stream": false,
             "stop": null
         };
-        const response = await axios.post('https://api.groq.com/v1/chat/completions', groqData, {
+        const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', groqData, {
             headers: {
                 'Authorization': `Bearer ${apiKey}`,
                 'Content-Type': 'application/json'
@@ -33,6 +32,7 @@ async function translateSlang(prompt) {
 
     } catch (error) {
         console.error('Error:', error.response ? error.response.data : error.message);
+        return null
     }
 }
 
