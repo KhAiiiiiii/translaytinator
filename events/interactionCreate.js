@@ -21,7 +21,13 @@ module.exports = async (client, inter) => {
         const customId = inter.customId
         if(!customId) return
 
-        const p = `../buttonActions/${customId}.js`
+        const actionName = customId.split("|")[0]
+        if(customId.split("|").length > 1) {
+            const userId = customId.split("|")[1]
+            if(inter.member.id !== userId) return
+        }
+
+        const p = `../buttonActions/${actionName}.js`
 
         delete require.cache[require.resolve(p)]
         const action = require(p)
