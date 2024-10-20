@@ -79,7 +79,7 @@ module.exports = {
                 else results.push('🟠')
             }
 
-            const resultEmbed = wordleAnswerEmbedBuilder({ results })
+            const resultEmbed = wordleAnswerEmbedBuilder({ results, guess: msg.content.trim() })
             await msg.reply({ embeds: [ resultEmbed ]})
             if(tries >= chances) return answerCollector.stop(false)
         })
