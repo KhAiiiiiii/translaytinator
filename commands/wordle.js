@@ -69,11 +69,11 @@ module.exports = {
             if(msg.content.trim().length !== difficulty) return await msg.reply(`That word was ${msg.content.length} letters longs. Please enter a valid ${difficulty}-letter word.`)
             
             tries++
-            if(msg.content.trim() === answer) return answerCollector.stop(true)
+            if(msg.content.trim().toLowerCase() === answer) return answerCollector.stop(true)
             const results = []
 
             for(let i = 0; i < difficulty; i++) {
-                const letter = msg.content[i]
+                const letter = msg.content[i].toLowerCase()
                 if(letter === answer[i]) results.push('🟢')
                 else if(answer.slice().split('').indexOf(letter) < 0) results.push('🔴')
                 else results.push('🟠')
