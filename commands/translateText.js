@@ -37,7 +37,15 @@ module.exports = {
         const textContent = inter.options.getString('text')
         await inter.editReply('Processing...')
         await inter.channel.sendTyping()
-        const originalTextMessage = await inter.channel.send(`${inter.member}: ${textContent}`)
+        //const originalTextMessage = await inter.channel.send(`${inter.member}: ${textContent}`)
+
+        // create webhook to spoof user
+        const wh = await inter.channel.createWebhook({
+            name: inter.member.displayName,
+            avatar: inter.member.displayAvatarURL()
+        })
+        const originalTextMessage = await wh.send({ content: textContent })
+        wh.delete()
 
         const prompt = client.config.translationBasePrompt
                         .replace('{0}', textContent)
