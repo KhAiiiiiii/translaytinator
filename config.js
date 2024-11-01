@@ -5,6 +5,6 @@ module.exports = {
     },
     aiModel: 'Meta Llama 3 8B',
     datasetUpdateInterval: 86400e3, // update dataset every day
-    promptThreshold: 0.4, // treshold of slang detected in a message when bot prompts for translation
-    translationBasePrompt: "{0}\nHelp me translate the text above to {1}",
+    promptThreshold: 0.1, // treshold of slang detected in a message when bot prompts for translation
+    translationBasePrompt: "{0}\nExplain the text above and provide a rephrased sentence in {1}",
 }
